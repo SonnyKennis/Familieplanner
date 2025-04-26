@@ -1,18 +1,24 @@
 package be.thomasmore.familieplanner.model;
 
 import jakarta.persistence.*;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDateTime;
 
 @Entity
 public class Activity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private int id;
+
     private String titel;
+    @Column
     private String beschrijving;
+    @DateTimeFormat
     private LocalDateTime starttijd;
+    @DateTimeFormat
     private LocalDateTime eindtijd;
+
 
     public int getId() {
         return id;

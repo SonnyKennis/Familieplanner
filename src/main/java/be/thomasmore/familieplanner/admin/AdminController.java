@@ -1,4 +1,4 @@
-package be.thomasmore.familieplanner.controller;
+package be.thomasmore.familieplanner.admin;
 
 import be.thomasmore.familieplanner.model.Activity;
 import be.thomasmore.familieplanner.repository.ActivityRepository;
@@ -11,24 +11,25 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/admin")
 public class AdminController {
 
+
     @Autowired
     private ActivityRepository activiteitRepository;
 
     @GetMapping("/activiteiten")
     public String lijstActiviteiten(Model model) {
         model.addAttribute("activiteiten", activiteitRepository.findAll());
-        return "adminactiviteiten";
+        return "calendaroverview";
     }
 
-    @GetMapping("/nieuweactiviteit")
+    @GetMapping("nieuweactiviteit")
     public String nieuweActiviteitForm(Model model) {
         model.addAttribute("activiteit", new Activity());
-        return "nieuweactiviteit";
+        return "admin/nieuweactiviteit";
     }
 
-    @PostMapping("/nieuweactiviteit")
-    public String activiteitToevoegen(@ModelAttribute Activity activiteit) {
-        activiteitRepository.save(activiteit);
-        return "redirect:/admin/activiteiten";
+    @PostMapping("nieuweactiviteit")
+    public String activiteitToevoegen(@ModelAttribute Activity activity) {
+        activiteitRepository.save(activity);
+        return "redirect:/calendaroverview";
     }
 }
