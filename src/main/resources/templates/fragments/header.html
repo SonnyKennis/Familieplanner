@@ -1,12 +1,13 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:fragment="headerelement">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/style.css}"/>
-    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/styles.css}">
+        <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/style.css}"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
           integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
@@ -15,43 +16,56 @@
 <body>
 
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark" th:fragment="navbar">
-    <div class="container-fluid">
-        <!-- Navbar Toggler for Mobile -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerParty"
-                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+    <div class="container-fluid position-relative">
 
-        <!-- Navbar Content (Logo and Links) -->
-        <div class="collapse navbar-collapse" id="navbarTogglerParty">
-            <!-- Logo -->
-            <div class="d-flex align-items-center">
-                <a class="navbar-brand" th:href="@{/home}" id="navbarLogo">
-                    <img th:src="@{/images/logo.png}" alt="Logo" height="40">
-                </a>
-                <div class="navbar-divider"></div>
-            </div>
+        <!-- Left side (Logo or Brand) -->
+        <div class="d-flex align-items-center">
+            <div style="width: 100px;"></div> <!-- Placeholder for logo or extra content -->
+        </div>
 
-            <!-- Nav Links -->
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-warning" id="navLinks">
+        <!-- Center nav links (Will remain fixed in the center) -->
+        <div class="collapse navbar-collapse justify-content-center position-absolute w-100" id="navbarTogglerParty">
+            <ul class="navbar-nav text-warning m-0 p-0 justify-content-center w-100">
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/Taken}">Kalender</a>
+                    <a class="nav-link text-center" th:href="@{/home}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/Taken}">Taken</a>
+                    <a class="nav-link text-center" th:href="@{/calendar}">Kalender</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/Taken}">Boodschappenlijstje</a>
+                    <a class="nav-link text-center" th:href="@{/Taken}">Taken</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-center" th:href="@{/Taken}">Boodschappenlijstje</a>
                 </li>
             </ul>
         </div>
 
-        <!-- Login Button (Aligned to the right) -->
-        <a th:href="@{/login}" class="btn btn-outline-light ms-auto">
-            <i class="fa fa-user"></i>
-        </a>
+        <!-- Right side: Auth buttons (login/logout/user info) -->
+        <div class="d-flex align-items-center gap-2" style="min-width: 180px; flex-shrink: 0; z-index: 10;">
+            <!-- User Info (Visible when logged in) -->
+            <div class="nav-text text-dark" sec:authorize="isAuthenticated()">
+                Ingelogd als <span sec:authentication="name"></span>
+            </div>
+
+            <!-- Login Button (Visible when not logged in) -->
+            <div class="nav-item" sec:authorize="!isAuthenticated()">
+                <a th:href="@{/user/login}" class="btn btn-outline-dark">
+                    <i class="fas fa-user" style="color: black;"></i>
+                </a>
+            </div>
+
+            <!-- Logout Button (Visible when logged in) -->
+            <div class="nav-item" sec:authorize="isAuthenticated()">
+                <a th:href="@{/user/logout}" class="btn btn-outline-dark">
+                    <i class="fas fa-sign-out-alt"></i>
+                </a>
+            </div>
+        </div>
     </div>
 </nav>
+
+<hr class="my-3">
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 

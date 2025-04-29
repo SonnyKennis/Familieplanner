@@ -53,6 +53,7 @@ public class SecurityConfiguration {
         http.formLogin(form -> form
                 .loginPage("/user/login")
                 .permitAll()
+                .defaultSuccessUrl("/home", true)
         );
         http.logout(form -> form.logoutUrl("/user/logout"));
 

@@ -10,12 +10,13 @@ import java.security.Principal;
 
 @Controller
 public class HomeController {
-    private final Logger logger = LoggerFactory.getLogger(HomeController.class);
-
+    private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
     @GetMapping("/home")
     public String home(Model model, Principal principal) {
-        final String loginname = principal != null ? principal.getName() : null;
-        logger.info("homepage - logged in as " + loginname);
-        return "home";
+        final String loginName = principal != null ? principal.getName() : null;
+        logger.info("homepage - logged in as " + loginName);
+        model.addAttribute("loginName", loginName);
+
+        return "home"; // Return homePage
     }
 }

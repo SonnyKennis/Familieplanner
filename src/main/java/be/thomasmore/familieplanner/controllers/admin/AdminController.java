@@ -1,4 +1,4 @@
-package be.thomasmore.familieplanner.admin;
+package be.thomasmore.familieplanner.controllers.admin;
 
 import be.thomasmore.familieplanner.model.Activity;
 import be.thomasmore.familieplanner.repository.ActivityRepository;
@@ -18,7 +18,7 @@ public class AdminController {
     @GetMapping("/activiteiten")
     public String lijstActiviteiten(Model model) {
         model.addAttribute("activiteiten", activiteitRepository.findAll());
-        return "calendaroverview";
+        return "calendar";
     }
 
     @GetMapping("nieuweactiviteit")
@@ -30,6 +30,6 @@ public class AdminController {
     @PostMapping("nieuweactiviteit")
     public String activiteitToevoegen(@ModelAttribute Activity activity) {
         activiteitRepository.save(activity);
-        return "redirect:/calendaroverview";
+        return "redirect:/calendar";
     }
 }

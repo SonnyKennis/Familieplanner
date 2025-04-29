@@ -15,17 +15,17 @@ public class CalendarController {
     private ActivityRepository activiteitRepository;
 
 
-    @GetMapping("/calendaroverview")
+    @GetMapping("/calendar")
     public String calendarOverview(Model model) {
         Iterable<Activity> activities = activiteitRepository.findAll();
         model.addAttribute("activiteiten", activities);
-        return "calendaroverview";
+        return "calendar";
     }
 
-    @PostMapping("/calendaroverview")
+    @PostMapping("/calendar")
             public String CalendarOverviewPost()
     {
 
-        return "calendaroverview";
+        return "calendar";
     }
 }
