@@ -22,9 +22,5 @@ public class CalendarController {
         return "calendaroverview";
     }
 
-    @PostMapping("/calendaroverview")
-            public String CalendarOverviewPost()
-    {
-        return "calendaroverview";
-    }
+
 }
