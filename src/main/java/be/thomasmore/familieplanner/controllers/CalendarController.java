@@ -1,4 +1,4 @@
-package be.thomasmore.familieplanner.controller;
+package be.thomasmore.familieplanner.controllers;
 import be.thomasmore.familieplanner.model.Activity;
 import be.thomasmore.familieplanner.repository.ActivityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
