@@ -1,8 +1,11 @@
 package be.thomasmore.familieplanner.admin;
 
 import be.thomasmore.familieplanner.model.Activity;
+import be.thomasmore.familieplanner.model.Tasks;
 import be.thomasmore.familieplanner.repository.ActivityRepository;
+import be.thomasmore.familieplanner.repository.TasksRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.config.Task;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +17,9 @@ public class AdminController {
 
     @Autowired
     private ActivityRepository activiteitRepository;
+
+    @Autowired
+    private TasksRepository taskRepository;
 
     @GetMapping("/activiteiten")
     public String lijstActiviteiten(Model model) {
@@ -32,4 +38,17 @@ public class AdminController {
         activiteitRepository.save(activity);
         return "redirect:/calendaroverview";
     }
+
+    @GetMapping("newtask")
+    public String newTasksForm(Model model) {
+        model.addAttribute("tasks", new Tasks());
+        return "admin/newtask";
+    }
+
+    @PostMapping("newtask")
+    public String addTasks(@ModelAttribute Tasks tasks) {
+        taskRepository.save(tasks);  // ✅ use the autowired instance
+        return "redirect:/tasksoverview";  // also fix redirect path
+    }
+
 }
