@@ -26,6 +26,4 @@ public class CalendarController {
         model.addAttribute("tasks", tasksRepository.findAll());
         return "calendaroverview";
     }
-
-
 }
