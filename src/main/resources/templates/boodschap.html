@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css.css">
+    <title>Boodschappenlijst</title>
+</head>
+<body>
+<h1>Boodschappenlijst</h1>
+<div class="container">
+    <div class="form">
+        <h2>Boodschappen</h2>
+        <form method="POST">
+            <label for="name">Naam:</label><br>
+            <input type="text" id="name" name="name" required><br>
+
+            <label for="hoeveelheid">Hoeveelheid:</label><br>
+            <input type="hoeveelheid" id="hoeveelheid" name="hoeveelheid" required><br>
+
+            <label for="Prioriteit">Prioriteit</label>
+            <input type="checkbox" name="prioriteit" id="prioriteit"><br>
+
+
+            <br>
+            <button type="submit">Voeg toe</button>
+        </form>
+    </div>
+    <div>
+        <table>
+            <tr>
+                <th>Naam</th>
+                <th>Hoeveelheid</th>
+
+            </tr>
+            <tr>
+                <td>Aardbeien</td>
+                <td>150 gram</td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>
