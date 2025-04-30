@@ -7,65 +7,70 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
 <div class="container mt-5">
-    <h2 class="text-center mb-4">Overzicht van Activiteiten</h2>
+    <h2 class="text-center mb-4">Overzicht van Activiteiten en Taken</h2>
 
-    <div class="row">
-        <div class="col-md-12">
-            <!-- Calendar -->
-            <div id="calendar">
-                <table class="table table-bordered">
-                    <thead>
-                    <tr>
-                        <th colspan="7" class="text-center">
-                            <!-- Button for Previous Month -->
-                            <button class="btn btn-outline-primary"
-                                    onclick="navigateMonth('${prevMonth}')">
-                                <i class="bi bi-arrow-left"></i>
-                            </button>
-                            Maand: <span th:text="${currentMonth}"></span> <span th:text="${currentYear}"></span>
-                            <!-- Button for Next Month -->
-                            <button class="btn btn-outline-primary"
-                                    onclick="navigateMonth('${nextMonth}')">
-                                <i class="bi bi-arrow-right"></i>
-                            </button>
-                        </th>
-                    </tr>
-                    <tr>
-                        <th>Sun</th>
-                        <th>Mon</th>
-                        <th>Tue</th>
-                        <th>Wed</th>
-                        <th>Thu</th>
-                        <th>Fri</th>
-                        <th>Sat</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="week : ${weeks}">
-                        <td th:each="day : ${week}">
-                            <span th:text="${day.dayOfMonth}"></span>
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div id="calendar" class="shadow p-4 rounded bg-white">
 
-                            <!-- Show activities for each day -->
-                            <div th:each="activity : ${activities}"
-                                 th:if="${#temporals.format(activity.starttijd, 'yyyy-MM-dd') == #temporals.format(day, 'yyyy-MM-dd')}">
-                                <div class="activity-info">
-                                    <p th:text="${activity.titel}"></p>
-                                    <p th:text="${#temporals.format(activity.starttijd, 'HH:mm')}"></p>
-                                </div>
+                <!-- Header and Navigation -->
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <a th:href="@{/calendar(month=${prevMonth})}" class="btn btn-outline-primary btn-sm">
+                        <i class="bi bi-arrow-left"></i>
+                    </a>
+                    <h5 class="mb-0 text-center">
+                        <span th:text="${currentMonth}"></span>
+                        <span th:text="${currentYear}"></span>
+                    </h5>
+                    <a th:href="@{/calendar(month=${nextMonth})}" class="btn btn-outline-primary btn-sm">
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+
+                <!-- Weekday Labels -->
+                <div class="row text-center fw-bold border-bottom pb-2 mb-2">
+                    <div class="col">Sun</div>
+                    <div class="col">Mon</div>
+                    <div class="col">Tue</div>
+                    <div class="col">Wed</div>
+                    <div class="col">Thu</div>
+                    <div class="col">Fri</div>
+                    <div class="col">Sat</div>
+                </div>
+
+                <!-- Calendar Weeks -->
+                <div th:each="week : ${weeks}" class="row mb-2">
+                    <div th:each="day : ${week}" class="col border p-2 rounded"
+                         th:classappend="${day.equals(T(java.time.LocalDate).now()) and day.month == currentMonth} ? 'bg-warning bg-opacity-25'">
+
+                        <!-- Display the day number -->
+                        <div class="fw-bold" th:text="${day.dayOfMonth}"></div>
+
+                        <!-- Display Activities for the day -->
+                        <div th:each="activity : ${activities}"
+                             th:if="${#temporals.format(activity.starttijd, 'yyyy-MM-dd') == #temporals.format(day, 'yyyy-MM-dd')}">
+                            <div class="badge bg-primary text-wrap d-block mt-1">
+                                <div th:text="${activity.titel}"></div>
+                                <small th:text="${#temporals.format(activity.starttijd, 'HH:mm')}"></small>
                             </div>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+                        </div>
+
+                        <!-- Display Tasks for the day -->
+                        <div th:each="task : ${tasks}"
+                             th:if="${#temporals.format(task.starttijd, 'yyyy-MM-dd') == #temporals.format(day, 'yyyy-MM-dd')}">
+                            <div class="badge bg-success text-wrap d-block mt-1">
+                                <div th:text="${task.titel}"></div>
+                                <small th:text="${#temporals.format(task.starttijd, 'HH:mm')}"></small>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
@@ -73,13 +78,6 @@
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-
-<script>
-    function navigateMonth(targetMonth) {
-        // Redirect to the new calendar page with the correct month value in dd/MM/yyyy format
-        window.location.href = '/calendar?month=' + targetMonth;
-    }
-</script>
 
 </body>
 </html>
