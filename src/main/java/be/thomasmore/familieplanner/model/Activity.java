@@ -14,9 +14,9 @@ public class Activity {
     private String titel;
     @Column
     private String beschrijving;
-    @DateTimeFormat
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime starttijd;
-    @DateTimeFormat
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime eindtijd;
 
 

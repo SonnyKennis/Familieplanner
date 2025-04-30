@@ -87,8 +87,9 @@ public class AdminController {
     @GetMapping("/activiteiten/delete/{id}")
     public String deleteActiviteit(@PathVariable("id") int id) {
         activiteitRepository.deleteById(id);
-        return "redirect:/calendaroverview";
+        return "redirect:/calendar";
     }
+
 
 
 }
