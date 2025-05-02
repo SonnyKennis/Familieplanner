@@ -1,0 +1,38 @@
+body {
+    background-color: antiquewhite;
+    text-align: center;
+}
+form{
+    text-align: left;
+    margin-left: 100px;
+    width: 300px;
+}
+
+table {
+    margin-top: 50px;
+    width: 300px;
+    background-color: white;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+tr {
+    border-bottom: 1px solid #ddd;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 50px; /* ruimte tussen formulier en tabel */
+    margin-top: 30px;
+}
