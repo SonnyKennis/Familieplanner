@@ -13,6 +13,13 @@
 <div class="container mt-5">
     <h2 class="text-center mb-4">Overzicht van Activiteiten en Taken</h2>
 
+    <!-- Button for creating a new activity -->
+    <div class="text-center mb-4">
+        <a href="/admin/nieuweactiviteit" class="btn btn-primary btn-lg">
+            <i class="bi bi-plus-circle"></i> Nieuwe Activiteit
+        </a>
+    </div>
+
     <div class="row justify-content-center">
         <div class="col-lg-10">
             <div id="calendar" class="shadow p-4 rounded bg-white">
@@ -54,8 +61,11 @@
                         <div th:each="activity : ${activities}"
                              th:if="${#temporals.format(activity.starttijd, 'yyyy-MM-dd') == #temporals.format(day, 'yyyy-MM-dd')}">
                             <div class="badge bg-primary text-wrap d-block mt-1">
-                                <div th:text="${activity.titel}"></div>
-                                <small th:text="${#temporals.format(activity.starttijd, 'HH:mm')}"></small>
+                                <!-- Link to edit activity -->
+                                <a th:href="@{/admin/activiteiten/edit/{id}(id=${activity.id})}" class="text-decoration-none text-white">
+                                    <div th:text="${activity.titel}"></div>
+                                    <small th:text="${#temporals.format(activity.starttijd, 'HH:mm')}"></small>
+                                </a>
                             </div>
                         </div>
 
@@ -63,8 +73,11 @@
                         <div th:each="task : ${tasks}"
                              th:if="${#temporals.format(task.starttijd, 'yyyy-MM-dd') == #temporals.format(day, 'yyyy-MM-dd')}">
                             <div class="badge bg-success text-wrap d-block mt-1">
-                                <div th:text="${task.titel}"></div>
-                                <small th:text="${#temporals.format(task.starttijd, 'HH:mm')}"></small>
+                                <!-- Link to edit task -->
+                                <a th:href="@{/admin/tasks/edit/{id}(id=${task.id})}" class="text-decoration-none text-white">
+                                    <div th:text="${task.titel}"></div>
+                                    <small th:text="${#temporals.format(task.starttijd, 'HH:mm')}"></small>
+                                </a>
                             </div>
                         </div>
 

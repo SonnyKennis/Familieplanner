@@ -4,9 +4,12 @@
     <title>Nieuwe Activiteit Toevoegen</title>
 
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEJpJ5p7w0g1f58TkAHz3UnbCxRmD1VxaMv5zEwsS3xiDhd4lz1FJ0uHkgmn" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Your Custom CSS File -->
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+    <!-- Custom styles (for consistency) -->
     <link rel="stylesheet" href="/css/styles.css">
 
     <!-- Favicon for professional touch -->
@@ -16,39 +19,42 @@
 <div class="container mt-5">
     <!-- Header Section with a Friendly Title -->
     <div class="text-center mb-4">
-        <h2 class="display-4">🎉 Nieuwe Activiteit Toevoegen</h2>
+        <h2 class="display-5">🎉 Nieuwe Activiteit Toevoegen</h2>
         <p class="lead">Vul de details in om een nieuwe activiteit toe te voegen!</p>
     </div>
 
-    <!-- Form Section with Bootstrap Styles -->
-    <div class="card shadow-lg rounded">
+    <!-- Form Section with consistent card styling -->
+    <div class="card shadow p-4 rounded bg-white">
         <div class="card-body">
             <form th:action="@{/admin/nieuweactiviteit}" th:object="${activiteit}" method="post">
                 <div class="mb-3">
                     <label for="titel" class="form-label">Titel:</label>
-                    <input type="text" id="titel" th:field="*{titel}" class="form-control" placeholder="Geef een titel in">
+                    <input type="text" id="titel" th:field="*{titel}" class="form-control" placeholder="Geef een titel in" required>
                 </div>
 
                 <div class="mb-3">
                     <label for="beschrijving" class="form-label">Beschrijving:</label>
-                    <input type="text" id="beschrijving" th:field="*{beschrijving}" class="form-control" placeholder="Geef een beschrijving in">
+                    <input type="text" id="beschrijving" th:field="*{beschrijving}" class="form-control" placeholder="Geef een beschrijving in" required>
                 </div>
 
                 <div class="mb-3">
                     <label for="starttijd" class="form-label">Starttijd:</label>
-                    <input type="datetime-local" id="starttijd" th:field="*{starttijd}" class="form-control">
+                    <!-- Updated datetime-local format -->
+                    <input type="datetime-local" id="starttijd" th:field="*{starttijd}" class="form-control" required>
                 </div>
 
                 <div class="mb-3">
                     <label for="eindtijd" class="form-label">Eindtijd:</label>
-                    <input type="datetime-local" id="eindtijd" th:field="*{eindtijd}" class="form-control">
+                    <!-- Updated datetime-local format -->
+                    <input type="datetime-local" id="eindtijd" th:field="*{eindtijd}" class="form-control" required>
                 </div>
 
-                <!-- Submit Button -->
-                <div class="text-center">
+                <!-- Form Action Buttons (Styled Consistently) -->
+                <div class="text-center mt-3">
                     <button type="submit" class="btn btn-success btn-lg">
                         <i class="bi bi-check-circle"></i> Toevoegen
                     </button>
+                    <a href="/calendaroverview" class="btn btn-secondary btn-lg ms-2">Annuleren</a>
                 </div>
             </form>
         </div>

@@ -81,7 +81,7 @@ public class AdminController {
     public String updateActiviteit(@PathVariable("id") int id, @ModelAttribute Activity updated) {
         updated.setId(id);
         activiteitRepository.save(updated);
-        return "redirect:/calendaroverview";
+        return "redirect:/calendar";
     }
 
     @GetMapping("/activiteiten/delete/{id}")
