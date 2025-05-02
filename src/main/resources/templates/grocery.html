@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <div th:replace="~{fragments/header :: headerelement}"></div>
+</head>
+<body class="grocery-page">
+<div th:replace="~{fragments/header :: navbar}"></div>
+
+<h1 class="grocery-title">Boodschappenlijst</h1>
+
+<div class="grocery-page-content container">
+  <div class="grocery-form-box">
+    <h2 class="grocery-subtitle">Voeg een item toe</h2>
+    <form method="POST" th:action="@{/grocery}" th:object="${newItem}">
+      <div class="form-group">
+        <label for="name">Naam:</label>
+        <input type="text" id="name" th:field="*{name}" required>
+      </div>
+
+      <div class="form-group">
+        <label for="quantity">Hoeveelheid:</label>
+        <input type="text" id="quantity" th:field="*{quantity}" required>
+      </div>
+
+      <button type="submit" class="grocery-submit-btn">Voeg toe</button>
+    </form>
+  </div>
+
+  <div class="grocery-box">
+    <h2>Items</h2>
+    <table class="grocery-table">
+      <tbody>
+      <tr th:each="item : ${groceryList}">
+        <td>
+          <form th:action="@{/grocery/toggle/{id}(id=${item.id})}" method="post">
+            <input type="checkbox" th:checked="${item.completed}" onchange="this.form.submit()">
+          </form>
+        </td>
+        <td th:text="${item.name}" th:style="${item.completed} ? 'text-decoration: line-through;' : ''"></td>
+        <td th:text="${item.quantity}" th:style="${item.completed} ? 'text-decoration: line-through;' : ''"></td>
+        <td>
+          <form th:action="@{/grocery/delete/{id}(id=${item.id})}" method="post">
+            <button type="submit" class="btn-delete">X</button>
+          </form>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>

@@ -7,8 +7,6 @@ VALUES ('🎮 Speeltijd', 'Vrije tijd om spelletjes te spelen', '2025-04-28T09:3
 
 
 
-
-
 -- Inserting User's and Admins --
 
 -- Developers --

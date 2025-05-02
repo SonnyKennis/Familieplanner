@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Activity</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<div class="container mt-5">
+    <!-- Page Header -->
+    <div class="text-center mb-4">
+        <h2 class="display-5">✏️ Activiteit Bewerken</h2>
+        <p class="lead">Pas hier de gegevens van de activiteit aan.</p>
+    </div>
+
+    <!-- Edit form -->
+    <div class="card shadow-lg rounded">
+        <div class="card-body">
+            <form th:action="@{'/admin/activiteiten/edit/' + ${activiteit.id}}" th:object="${activiteit}" method="post">
+                <div class="mb-3">
+                    <label for="titel" class="form-label">Titel:</label>
+                    <input type="text" id="titel" th:field="*{titel}" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="beschrijving" class="form-label">Beschrijving:</label>
+                    <input type="text" id="beschrijving" th:field="*{beschrijving}" class="form-control">
+                </div>
+
+                <div class="mb-3">
+                    <label for="starttijd" class="form-label">Starttijd:</label>
+                    <input type="datetime-local" id="starttijd" th:field="*{starttijd}" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="eindtijd" class="form-label">Eindtijd:</label>
+                    <input type="datetime-local" id="eindtijd" th:field="*{eindtijd}" class="form-control" required>
+                </div>
+
+                <!-- Form actions -->
+                <div class="text-center">
+                    <button type="submit" class="btn btn-success btn-lg">
+                        <i class="bi bi-check-circle"></i> Opslaan
+                    </button>
+                    <a href="/calendaroverview" class="btn btn-secondary btn-lg ms-2">Annuleren</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
